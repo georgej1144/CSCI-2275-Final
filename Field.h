@@ -1,10 +1,10 @@
 #ifndef CSCI2275FINAL_FIELD_H
 #define CSCI2275FINAL_FIELD_H
 
+//#include "main.h"
+
 #include "Queue.h"
-#include "Queue.cpp"
 #include "DLL.h"
-#include "DLL.cpp"
 #include "Score.h"
 
 //TODO create field object that stores total field state
@@ -19,13 +19,15 @@
 
 class Field {
 private:
-    circQueue<BallType> fieldState[9] = {circQueue<BallType>(3), circQueue<BallType>(3), circQueue<BallType>(3), circQueue<BallType>(3), circQueue<BallType>(3), circQueue<BallType>(3), circQueue<BallType>(3), circQueue<BallType>(3), circQueue<BallType>(3)};
+    circQueue fieldState[9] = {circQueue(2), circQueue(2), circQueue(2), circQueue(2), circQueue(2), circQueue(2), circQueue(2), circQueue(2), circQueue(2)};
     DLL<string> lastMove;
     int freeRedBalls = 7;
     int freeBlueBalls = 7;
 public:
     Field();
-    Field(Field const &source);
+    //Field(Field const &source);
+    Field clone();
+    circQueue* getFieldState();
     Score currentScore();
     void printField();
     void lastMoveDump();
@@ -42,7 +44,6 @@ public:
 
     int scoreDifference();
     int towersOccupied();
-
 
 };
 

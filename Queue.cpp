@@ -1,29 +1,27 @@
-#pragma once
+//#include "main.h"
 
 #include <iostream>
 #include <string>
+#include <sstream>
 #include "Queue.h"
 
 using namespace std;
 
-template <typename T>
-circQueue<T>::circQueue(int size) {
+circQueue::circQueue(int size) {
     head = tail = -1;
     maxSize = size;
     count = 0;
-    queue = new T[maxSize];
+    queue = new BallType[maxSize];
     for(int i = 0; i < maxSize; i++) {
         queue[i] = E;
     }
 }
 
-template <typename T>
-void circQueue<T>::enqueue(T toQ) {
+void circQueue::enqueue(BallType toQ) {
     //cout << "Enqueueing " << toQ << endl;
     if(tail == maxSize-1) {
         if(isFull()) {
-            cout << "Queue is already full" << endl;
-            return;
+            dequeue();
         }
         tail = -1;
     }
@@ -35,14 +33,13 @@ void circQueue<T>::enqueue(T toQ) {
     queue[tail] = toQ;
 }
 
-template <typename T>
-T circQueue<T>::dequeue() {
+BallType circQueue::dequeue() {
     if(queue[head] == -1) {
         cout << "Queue is empty" << endl;
         return E;
     }
     if(head > maxSize-1) head = 0;
-    T temp = queue[head];
+    BallType temp = queue[head];
     queue[head] = E;
     head++;
     count--;
@@ -50,40 +47,77 @@ T circQueue<T>::dequeue() {
     return temp;
 }
 
-template <typename T>
-void circQueue<T>::printQueue() {
+void circQueue::printQueue() {
     if (head == -1) {
-        cout << "Queue empty" << endl;
+        cout << "error, shouldnt be empty like this";
         return;
     }
 
-    cout << "\nPrinting (circular) queue: " << endl;
+    //cout << "\nPrinting (circular) queue: " << endl;
     if (tail >= head) {
-        for (int i = head; i <= tail; i++) {
-            cout << "q[" << i << "]: " << queue[i] << " | ";
+        for (int i = tail; i <= head; i--) {
+            cout << queue[i] << "|";
         }
     } else {
-        for (int i = head; i < maxSize; i++) {
-            cout << "q[" << i << "]: " << queue[i] << " | ";
+        for (int i = tail; i >= 0; i--) {  ////////////
+            cout << queue[i] << "|";
         }
-        for (int i = 0; i <= tail; i++) {
-            cout << "q[" << i << "]: " << queue[i] << " | ";
+        for (int i = maxSize; i <= head; i--) {
+            cout << queue[i] << "|";
         }
     }
-    cout << endl;
+    cout << "   ";
 }
 
-template <typename T>
-bool circQueue<T>::isFull() {
+
+bool circQueue::isFull() {
     return count == maxSize;
 }
 
-template <typename T>
-bool circQueue<T>::isEmpty() {
+
+bool circQueue::isEmpty() {
     return count == 0;
 }
 
-template <typename T>
-T circQueue<T>::top() {
+
+BallType circQueue::top() {
     return queue[tail];
+}
+
+
+stringstream circQueue::outputQueue() {
+    stringstream output;
+    if (head == -1) {
+        cout << "error, shouldnt be empty like this";
+    }
+
+    if (tail >= head) {
+        for (int i = tail; i >= head; i--) {
+            cout << queue[i] << "|";
+            output << queue[i] << "|";
+        }
+    } else {
+        for (int i = tail; i >= 0; i--) {  ////////////
+            cout << queue[i] << "|";
+            output << queue[i] << "|";
+        }
+        for (int i = maxSize; i >= head; i--) {
+            cout << queue[i] << "|";
+            output << queue[i] << "|";
+        }
+    }
+    cout << "   ";
+    return output;
+}
+
+
+void circQueue::inputQueue(stringstream input) {
+    string line;
+    string goal;
+    string ball;
+    while(getline(input, ball, '|')) {
+        if(ball == "R") enqueue(R);
+        if(ball == "B") enqueue(B);
+        if(ball == "E") enqueue(E);
+    }
 }

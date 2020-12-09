@@ -1,9 +1,9 @@
+//#include "main.h"
 #include "Calc.h"
 #include <cmath>
+#include "Field.h"
 #include "Queue.h"
-#include "Queue.cpp"
 #include "DLL.h"
-#include "DLL.cpp"
 #include "Score.h"
 
 Calc::Calc() = default;
@@ -54,8 +54,8 @@ void Calc::bestDelta() {
     cout << endl;
 }
 
-void Calc::moveIterate(Field &startState, int nIterations) {
-    Field inputField = startState;
+void Calc::moveIterate(const Field& startState, int nIterations) {
+    Field inputField(startState);
 
     preCalcScore = inputField.currentScore();
 

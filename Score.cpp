@@ -1,5 +1,7 @@
+//#include "main.h"
+
 #include "Score.h"
-#include <iostream>
+
 
 void Score::printScore() const {
     cout << "Home: " << Home << " Away: " << Away << endl;

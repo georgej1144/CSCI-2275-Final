@@ -1,3 +1,4 @@
+//#include "main.h"
 #include <iostream>
 #include <string>
 #include "DLL.h"
@@ -31,6 +32,7 @@ int main() {
                 int n;
                 cin >> n;
                 calcMachine.moveIterate(masterField, n);
+                calcMachine.bestDelta();
                 break;
             case 2:
                 break;

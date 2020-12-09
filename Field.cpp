@@ -1,3 +1,4 @@
+//#include "main.h"
 #include "Field.h"
 #include "Queue.h"
 #include <string>
@@ -36,15 +37,30 @@ Field::Field() {
     lastMove.append("");
 }
 
-Field::Field(const Field &source) {
-    copy(&source.fieldState[0], &source.fieldState[0]+9, &fieldState[0]);
+//Field::Field(const Field &source) {
+//    copy(&source.fieldState[0], &source.fieldState[0]+9, &fieldState[0]);
+//}
+
+Field Field::clone() {
+    auto newField = new Field();
+
+    for(int x = 0; x < 9; x++) {
+        newField->fieldState[x].inputQueue(fieldState[x].outputQueue());
+        if((x+1)%3 == 0) cout << endl;
+    }
+    newField->lastMove.inputDLL(lastMove.outputDLL());
+
+    newField->freeRedBalls = freeRedBalls;
+    newField->freeBlueBalls = freeBlueBalls;
+
+    return *newField;
 }
 
 Score Field::currentScore() {
     Score output;
 
-    for(int i = 0; i < 9; i++) {
-        auto *tempQueue = new circQueue<BallType>(3);
+    for(int i = 0; i < 9; i++) {        //todo FIX, JUST ADD COUNTERS DEQUEUEING BAD BAD
+        auto *tempQueue = new circQueue(3);
         tempQueue = fieldState;
 
         BallType tempBall;
@@ -55,9 +71,6 @@ Score Field::currentScore() {
             if(tempBall == R) output.Home++;
             if(tempBall == B) output.Away++;
         }
-
-        delete tempQueue;
-
     }
 
     freeRedBalls = 16-output.Home;
@@ -89,137 +102,141 @@ void Field::lastMoveDump() {
 }
 
 Field Field::R1(Field seed) {
-    auto output = new Field(seed);
+    Field output = seed.clone();
 
     if(!(lastMove.dataAtTail() == "CLOSE1")) {
-        if(output->freeRedBalls > 0) {
-            output->lastMove.append("addR1");
-            output->fieldState[1].enqueue(R);
-            output->freeRedBalls--;
+        if(output.freeRedBalls > 0) {
+            output.lastMove.append("addR1");
+            output.fieldState[1].enqueue(R);
+            output.freeRedBalls--;
         } else {
-            output->lastMove.append("No more red balls on the field");
-            output->lastMove.append("CLOSE1");
+            output.lastMove.append("No more red balls on the field");
+            output.lastMove.append("CLOSE1");
         }
     }
-    return *output;
+    return output;
 }
 Field Field::R2(Field seed) {
-    auto output = new Field(seed);
+    Field output = seed.clone();
 
     if(!(lastMove.dataAtTail() == "CLOSE2")) {
-        if(output->freeRedBalls > 0) {
-            output->lastMove.append("addR2");
-            output->fieldState[2].enqueue(R);
-            output->freeRedBalls--;
+        if(output.freeRedBalls > 0) {
+            output.lastMove.append("addR2");
+            output.fieldState[2].enqueue(R);
+            output.freeRedBalls--;
         } else {
-            output->lastMove.append("No more red balls on the field");
-            output->lastMove.append("CLOSE2");
+            output.lastMove.append("No more red balls on the field");
+            output.lastMove.append("CLOSE2");
         }
     }
-    return *output;
+    return output;
 }
 Field Field::R3(Field seed) {
-    auto output = new Field(seed);
+    Field output = seed.clone();
 
     if(!(lastMove.dataAtTail() == "CLOSE3")) {
-        if(output->freeRedBalls > 0) {
-            output->lastMove.append("addR3");
-            output->fieldState[3].enqueue(R);
-            output->freeRedBalls--;
+        if(output.freeRedBalls > 0) {
+            output.lastMove.append("addR3");
+            output.fieldState[3].enqueue(R);
+            output.freeRedBalls--;
         } else {
-            output->lastMove.append("No more red balls on the field");
-            output->lastMove.append("CLOSE3");
+            output.lastMove.append("No more red balls on the field");
+            output.lastMove.append("CLOSE3");
         }
     }
-    return *output;
+    return output;
 }
 Field Field::R4(Field seed) {
-    auto output = new Field(seed);
+    Field output = seed.clone();
 
     if(!(lastMove.dataAtTail() == "CLOSE4")) {
-        if(output->freeRedBalls > 0) {
-            output->lastMove.append("addR4");
-            output->fieldState[4].enqueue(R);
-            output->freeRedBalls--;
+        if(output.freeRedBalls > 0) {
+            output.lastMove.append("addR4");
+            output.fieldState[4].enqueue(R);
+            output.freeRedBalls--;
         } else {
-            output->lastMove.append("No more red balls on the field");
-            output->lastMove.append("CLOSE4");
+            output.lastMove.append("No more red balls on the field");
+            output.lastMove.append("CLOSE4");
         }
     }
-    return *output;
+    return output;
 }
 Field Field::R5(Field seed) {
-    auto output = new Field(seed);
+    Field output = seed.clone();
 
     if(!(lastMove.dataAtTail() == "CLOSE5")) {
-        if(output->freeRedBalls > 0) {
-            output->lastMove.append("addR5");
-            output->fieldState[5].enqueue(R);
-            output->freeRedBalls--;
+        if(output.freeRedBalls > 0) {
+            output.lastMove.append("addR5");
+            output.fieldState[5].enqueue(R);
+            output.freeRedBalls--;
         } else {
-            output->lastMove.append("No more red balls on the field");
-            output->lastMove.append("CLOSE5");
+            output.lastMove.append("No more red balls on the field");
+            output.lastMove.append("CLOSE5");
         }
     }
-    return *output;
+    return output;
 }
 Field Field::R6(Field seed) {
-    auto output = new Field(seed);
+    Field output = seed.clone();
 
     if(!(lastMove.dataAtTail() == "CLOSE6")) {
-        if(output->freeRedBalls > 0) {
-            output->lastMove.append("addR6");
-            output->fieldState[6].enqueue(R);
-            output->freeRedBalls--;
+        if(output.freeRedBalls > 0) {
+            output.lastMove.append("addR6");
+            output.fieldState[6].enqueue(R);
+            output.freeRedBalls--;
         } else {
-            output->lastMove.append("No more red balls on the field");
-            output->lastMove.append("CLOSE6");
+            output.lastMove.append("No more red balls on the field");
+            output.lastMove.append("CLOSE6");
         }
     }
-    return *output;
+    return output;
 }
 Field Field::R7(Field seed) {
-    auto output = new Field(seed);
+    Field output = seed.clone();
 
     if(!(lastMove.dataAtTail() == "CLOSE7")) {
-        if(output->freeRedBalls > 0) {
-            output->lastMove.append("addR7");
-            output->fieldState[7].enqueue(R);
-            output->freeRedBalls--;
+        if(output.freeRedBalls > 0) {
+            output.lastMove.append("addR7");
+            output.fieldState[7].enqueue(R);
+            output.freeRedBalls--;
         } else {
-            output->lastMove.append("No more red balls on the field");
-            output->lastMove.append("CLOSE7");
+            output.lastMove.append("No more red balls on the field");
+            output.lastMove.append("CLOSE7");
         }
     }
-    return *output;
+    return output;
 }
 Field Field::R8(Field seed) {
-    auto output = new Field(seed);
+    Field output = seed.clone();
 
     if(!(lastMove.dataAtTail() == "CLOSE8")) {
-        if(output->freeRedBalls > 0) {
-            output->lastMove.append("addR8");
-            output->fieldState[8].enqueue(R);
-            output->freeRedBalls--;
+        if(output.freeRedBalls > 0) {
+            output.lastMove.append("addR8");
+            output.fieldState[8].enqueue(R);
+            output.freeRedBalls--;
         } else {
-            output->lastMove.append("No more red balls on the field");
-            output->lastMove.append("CLOSE8");
+            output.lastMove.append("No more red balls on the field");
+            output.lastMove.append("CLOSE8");
         }
     }
-    return *output;
+    return output;
 }
 Field Field::R9(Field seed) {
-    auto output = new Field(seed);
+    Field output = seed.clone();
 
     if(!(lastMove.dataAtTail() == "CLOSE9")) {
-        if(output->freeRedBalls > 0) {
-            output->lastMove.append("addR9");
-            output->fieldState[9].enqueue(R);
-            output->freeRedBalls--;
+        if(output.freeRedBalls > 0) {
+            output.lastMove.append("addR9");
+            output.fieldState[9].enqueue(R);
+            output.freeRedBalls--;
         } else {
-            output->lastMove.append("No more red balls on the field");
-            output->lastMove.append("CLOSE9");
+            output.lastMove.append("No more red balls on the field");
+            output.lastMove.append("CLOSE9");
         }
     }
-    return *output;
+    return output;
+}
+
+circQueue *Field::getFieldState() {
+    return fieldState;
 }

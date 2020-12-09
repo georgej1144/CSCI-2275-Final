@@ -1,6 +1,8 @@
 #ifndef CSCI2275FINAL_DLL_H
 #define CSCI2275FINAL_DLL_H
 
+//#include "main.h"
+
 using namespace std;
 
 //16 red balls
@@ -34,9 +36,11 @@ public:
     void showLL();
     T dataAtTail();
     void reverseShow();
+    void inputDLL(stringstream input);
+    stringstream outputDLL();
 };
 
 
-
+//#include "DLL.cpp"
 
 #endif //CSCI2275FINAL_DLL_H

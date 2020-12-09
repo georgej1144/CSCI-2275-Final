@@ -1,12 +1,16 @@
-#pragma once
-
+//#include "main.h"
 #include <string>
+#include <sstream>
 #include <iostream>
 #include "DLL.h"
+#include "Field.h"
 
 using namespace std;
 
 //doubly linked list
+
+template class DLL<string>;
+template class DLL<Field>;
 
 template <typename T>
 DLL<T>::DLL() {
@@ -102,7 +106,9 @@ void DLL<T>::reverseShow() {
 
 template <typename T>
 T DLL<T>::dataAtTail() {
-        if(!tail) {return nullptr;}
+    if(!tail) {
+        return T();
+    }     //TODO somehow R1 is getting fed a field where lastMove doesn't have "" appended (which should be done in constructor). try removing constructor override and adding clone func.
     return tail->data;
 }
 
@@ -121,4 +127,41 @@ T DLL<T>::dataAtIndex(int index) {
 template<typename T>
 LLNode<T>* DLL<T>::getHead() {
     return head;
+}
+
+template<typename T>
+stringstream DLL<T>::outputDLL() {
+    if(typeid(head->data).name() != "string") return stringstream();
+    stringstream output;
+    if (head == nullptr) {
+        cout << "This should not be empty!" << endl;
+    }
+
+    LLNode<T> *crawler = head;
+    while(crawler != nullptr) {
+        output << crawler->data << " ";
+
+        crawler = crawler->next;
+    }
+
+    return output;
+}
+
+template<>
+stringstream DLL<Field>::outputDLL() {
+    return stringstream();
+}
+
+template<typename T>
+void DLL<T>::inputDLL(stringstream input) {
+    if(typeid(T).name() != "string") return;
+    string word;
+    while(getline(input, word, ' ')) {
+        append(word);
+    }
+}
+
+template<>
+void DLL<Field>::inputDLL(stringstream input) {
+    return;
 }

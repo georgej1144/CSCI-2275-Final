@@ -1,15 +1,18 @@
 #ifndef CSCI2275FINAL_QUEUE_H
 #define CSCI2275FINAL_QUEUE_H
 
+//#include "main.h"
+
 #include <iostream>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
 
 enum BallType {B = 1, R = 0, E = -1};
 //circular queues
-template <typename T>
+
 class circQueue {
 private:
     int head;
@@ -18,14 +21,15 @@ private:
     int maxSize;
 public:
 
-    T *queue;
+    stringstream outputQueue();
+    void inputQueue(stringstream input);
+    BallType *queue;
     explicit circQueue(int size);
-
     bool isFull();
     bool isEmpty();
-    T top();
-    void enqueue(T);
-    T dequeue();
+    BallType top();
+    void enqueue(BallType);
+    BallType dequeue();
     void printQueue();
 };
 
