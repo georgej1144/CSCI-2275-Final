@@ -18,20 +18,24 @@ DLL<T>::DLL() {
     tail = nullptr;
 }
 
-template <typename T>
-DLL<T>::~DLL() {
-    if(head == nullptr) {
-        cout << "Nothing to delete, LL empty." << endl;
-    }
-    LLNode<T> *crawler = head;
-    while(crawler != nullptr) {
-        head = head->next;
-        //cout << "deleting node with key: " << crawler->index << endl;
-        delete crawler;
-        crawler = head;
-    }
-    head = nullptr;
-}
+//template <typename T>
+//DLL<T>::~DLL() {
+//    if(head == nullptr) {
+//        cout << "Nothing to delete, LL empty." << endl;
+//    }
+//    LLNode<T> *crawler = head;
+//    if(!head->next) {
+//        delete head;
+//        return;
+//    }
+//    while(crawler != nullptr) {
+//        head = head->next;
+//        //cout << "deleting node with key: " << crawler->index << endl;
+//        delete crawler;
+//        crawler = head;
+//    }
+//    head = nullptr;
+//}
 
 ////add value to the front of the list
 //template <typename T>

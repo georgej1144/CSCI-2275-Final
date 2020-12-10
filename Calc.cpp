@@ -60,7 +60,7 @@ void Calc::moveIterate(const Field& startState, int nIterations) {
     preCalcScore = inputField.currentScore();
 
     deltaCache.append(inputField);
-    for(int i = 0; i < pow(9,nIterations-1); i++) {
+    for(int i = 0; i < pow(9,nIterations-1); i++) {     //results in 9^nIterations stored in deltaCache
         deltaCache.append(inputField.R1(deltaCache.dataAtIndex(i)));
         deltaCache.append(inputField.R2(deltaCache.dataAtIndex(i)));
         deltaCache.append(inputField.R3(deltaCache.dataAtIndex(i)));

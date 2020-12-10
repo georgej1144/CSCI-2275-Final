@@ -19,7 +19,9 @@
 
 class Field {
 private:
-    circQueue fieldState[9] = {circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3)};
+//    circQueue fieldState[9] = {circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3)};
+    LLQueue fieldState[9] = {LLQueue(), LLQueue(), LLQueue(), LLQueue(), LLQueue(), LLQueue(), LLQueue(), LLQueue(), LLQueue(),};
+
     DLL<string> lastMove;
     int freeRedBalls = 7;
     int freeBlueBalls = 7;
@@ -27,7 +29,8 @@ public:
     Field();
     //Field(Field const &source);
     Field clone();
-    circQueue* getFieldState();
+//    circQueue* getFieldState();
+    LLQueue* getFieldState();
     Score currentScore();
     void printField();
     void lastMoveDump();
