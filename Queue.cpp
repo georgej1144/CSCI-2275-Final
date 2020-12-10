@@ -11,13 +11,13 @@ circQueue::circQueue(int size) {
     head = tail = -1;
     maxSize = size;
     count = 0;
-    queue = new BallType[maxSize];
+    queue = new string[maxSize];
     for(int i = 0; i < maxSize; i++) {
-        queue[i] = E;
+        queue[i] = "E";
     }
 }
 
-void circQueue::enqueue(BallType toQ) {
+void circQueue::enqueue(string toQ) {
     //cout << "Enqueueing " << toQ << endl;
     if(tail == maxSize-1) {
         if(isFull()) {
@@ -31,16 +31,17 @@ void circQueue::enqueue(BallType toQ) {
     tail++;
     count++;
     queue[tail] = toQ;
+    //cout << tail << ": "<< toQ << endl;
 }
 
-BallType circQueue::dequeue() {
-    if(queue[head] == -1) {
+string circQueue::dequeue() {
+    if(queue[head] == "E") {
         cout << "Queue is empty" << endl;
-        return E;
+        return "E";
     }
     if(head > maxSize-1) head = 0;
-    BallType temp = queue[head];
-    queue[head] = E;
+    string temp = queue[head];
+    queue[head] = "E";
     head++;
     count--;
     //cout << "Dequeueing " << temp << endl;
@@ -55,14 +56,14 @@ void circQueue::printQueue() {
 
     //cout << "\nPrinting (circular) queue: " << endl;
     if (tail >= head) {
-        for (int i = tail; i <= head; i--) {
+        for (int i = tail; i >= head; i--) {
             cout << queue[i] << "|";
         }
     } else {
         for (int i = tail; i >= 0; i--) {  ////////////
             cout << queue[i] << "|";
         }
-        for (int i = maxSize; i <= head; i--) {
+        for (int i = maxSize; i >= head; i--) {
             cout << queue[i] << "|";
         }
     }
@@ -80,7 +81,7 @@ bool circQueue::isEmpty() {
 }
 
 
-BallType circQueue::top() {
+string circQueue::top() {
     return queue[tail];
 }
 
@@ -116,8 +117,8 @@ void circQueue::inputQueue(stringstream input) {
     string goal;
     string ball;
     while(getline(input, ball, '|')) {
-        if(ball == "R") enqueue(R);
-        if(ball == "B") enqueue(B);
-        if(ball == "E") enqueue(E);
+        if(ball == "R") enqueue("R");
+        if(ball == "B") enqueue("B");
+        if(ball == "E") enqueue("E");
     }
 }

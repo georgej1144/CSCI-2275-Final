@@ -10,7 +10,7 @@
 using namespace std;
 
 
-enum BallType {B = 1, R = 0, E = -1};
+//enum BallType {B = 1, R = 0, E = 2};
 //circular queues
 
 class circQueue {
@@ -23,13 +23,13 @@ public:
 
     stringstream outputQueue();
     void inputQueue(stringstream input);
-    BallType *queue;
+    string *queue;
     explicit circQueue(int size);
     bool isFull();
     bool isEmpty();
-    BallType top();
-    void enqueue(BallType);
-    BallType dequeue();
+    string top();
+    void enqueue(string);
+    string dequeue();
     void printQueue();
 };
 

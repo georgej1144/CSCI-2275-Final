@@ -19,7 +19,7 @@
 
 class Field {
 private:
-    circQueue fieldState[9] = {circQueue(2), circQueue(2), circQueue(2), circQueue(2), circQueue(2), circQueue(2), circQueue(2), circQueue(2), circQueue(2)};
+    circQueue fieldState[9] = {circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3)};
     DLL<string> lastMove;
     int freeRedBalls = 7;
     int freeBlueBalls = 7;
