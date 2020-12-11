@@ -31,27 +31,27 @@ void Calc::bestDelta() {
         crawl = crawl->next;
     }
     //mass output of best moves
-    cout <<"-----Results from greatest to least-----" << endl;
+    cout << endl << "-----Results from greatest to least-----" << endl;
     best1.currentScore().printScore();
     cout << "Resulting score difference: " << best1.currentScore().difference() << endl;
     cout << "Difference in score difference: " << best1.currentScore().difference() - preCalcScore.difference() << endl;
     cout << "Path: ";
     best1.lastMoveDump();
-    cout << endl;
+    cout << endl << endl;
 
     best2.currentScore().printScore();
     cout << "Resulting score difference: " << best2.currentScore().difference() << endl;
     cout << "Difference in score difference: " << best2.currentScore().difference() - preCalcScore.difference() << endl;
     cout <<"Path: ";
     best2.lastMoveDump();
-    cout << endl;
+    cout << endl << endl;
 
     best3.currentScore().printScore();
     cout << "Resulting score difference: " << best3.currentScore().difference() << endl;
-    cout << "Difference in score difference: " << best3.currentScore().difference() - preCalcScore.difference();
+    cout << "Difference in score difference: " << best3.currentScore().difference() - preCalcScore.difference() << endl;
     cout << "Path: ";
     best3.lastMoveDump();
-    cout << endl;
+    cout << endl << endl;
 }
 
 void Calc::moveIterate(const Field& startState, int nIterations) {

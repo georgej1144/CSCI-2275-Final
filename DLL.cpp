@@ -59,40 +59,54 @@ DLL<T>::DLL() {
 template <typename T>
 void DLL<T>::append(T value) {
     if(head == nullptr) {
-        auto *node = new LLNode<T>;
+        auto node = new LLNode<T>;
         node->data = value;
         node->index = 0;
         head = node;
         tail = node;
+        length++;
         return;
     }
-    auto *node = new LLNode<T>;
+    auto node = new LLNode<T>;
     node->data = value;
     node->prev = tail;
     tail->next = node;
     node->index = node->prev->index + 1;
-
+    length++;
     tail = node;
 }
 
 //iterate through LL and print each value
-template <typename T>
-void DLL<T>::showLL() {
+template <>
+void DLL<string>::showLL() {
     if (head == nullptr) {
         cout << "empty LL" << endl;
         return;
     }
 
-    LLNode<T> *crawler = head;
-    while(crawler != nullptr) {
-        cout << crawler->index;
-        if (crawler->next != nullptr) //no arrow after last node
-            cout << " --> ";
+    if(!head->next) {
+        cout << "No steps, possibly error" << endl;
+        return;
+    }
+
+    auto crawler = head->next;
+    while(crawler) {
+        if(!crawler->data.empty()) {
+            cout << crawler->data;
+            if (crawler->next) cout << " --> ";
+        }
         crawler = crawler->next;
     }
 
-    cout << "\n\nhead: " << head->index << endl;
-    cout << "tail: " << tail->index << endl << endl;
+    //cout << "end of dll" << endl;
+
+//    cout << "\n\nhead: " << head->index << endl;
+//    cout << "tail: " << tail->index << endl << endl;
+}
+
+template<typename T>
+void DLL<T>::showLL() {
+    return;
 }
 
 template <typename T>
@@ -112,7 +126,7 @@ template <typename T>
 T DLL<T>::dataAtTail() {
     if(!tail) {
         return T();
-    }     //TODO somehow R1 is getting fed a field where lastMove doesn't have "" appended (which should be done in constructor). try removing constructor override and adding clone func.
+    }
     return tail->data;
 }
 
@@ -126,6 +140,7 @@ T DLL<T>::dataAtIndex(int index) {
         }
         crawl = crawl->next;
     }
+    return crawl->data;
 }
 
 template<typename T>
@@ -135,7 +150,7 @@ LLNode<T>* DLL<T>::getHead() {
 
 template<typename T>
 stringstream DLL<T>::outputDLL() {
-    if(typeid(head->data).name() != "string") return stringstream();
+    //if(typeid(head->data).name() != "string") return stringstream();
     stringstream output;
     if (head == nullptr) {
         cout << "This should not be empty!" << endl;
@@ -158,12 +173,24 @@ stringstream DLL<Field>::outputDLL() {
 
 template<typename T>
 void DLL<T>::inputDLL(stringstream input) {
-    if(typeid(T).name() != "string") return;
     string word;
     while(getline(input, word, ' ')) {
         append(word);
     }
 }
+
+//template<typename T>
+//T *DLL<T>::pdataAtIndex(int index) {
+//    auto crawl = head;
+//
+//    while(crawl) {
+//        if(crawl->index == index) {
+//            return crawl->data;
+//        }
+//        crawl = crawl->next;
+//    }
+//    return crawl;
+//}
 
 template<>
 void DLL<Field>::inputDLL(stringstream input) {

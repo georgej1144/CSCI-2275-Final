@@ -7,10 +7,12 @@
 #include "DLL.h"
 #include "Field.h"
 #include "Score.h"
+#include "BST.h"
 
 class Calc {
 private:
     DLL<Field> deltaCache;
+    BST sortedCache;
     Score preCalcScore;
 public:
     Calc();

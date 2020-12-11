@@ -7,8 +7,6 @@
 #include "DLL.h"
 #include "Score.h"
 
-//TODO create field object that stores total field state
-
 /*
  * BR RBR RB
  * BR     RB
@@ -21,7 +19,7 @@ class Field {
 private:
 //    circQueue fieldState[9] = {circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3), circQueue(3)};
     LLQueue fieldState[9] = {LLQueue(), LLQueue(), LLQueue(), LLQueue(), LLQueue(), LLQueue(), LLQueue(), LLQueue(), LLQueue(),};
-
+    Score fieldScore;
     DLL<string> lastMove;
     int freeRedBalls = 7;
     int freeBlueBalls = 7;

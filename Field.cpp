@@ -38,6 +38,9 @@ Field::Field() {
 //    printField();
 
     lastMove.append("");
+
+    fieldScore = currentScore();
+
 }
 
 //Field::Field(const Field &source) {
@@ -52,6 +55,9 @@ Field Field::clone() {
         //if((x+1)%3 == 0) cout << endl;
     }
     newField->lastMove.inputDLL(lastMove.outputDLL());
+
+    newField->fieldScore.Home = fieldScore.Home;
+    newField->fieldScore.Away = fieldScore.Away;
 
     newField->freeRedBalls = freeRedBalls;
     newField->freeBlueBalls = freeBlueBalls;
@@ -244,7 +250,6 @@ Field Field::R9(Field seed) {               //error on R9. diagnose why
     return output;
 }
 
-
 //circQueue *Field::getFieldState() {
 //    return fieldState;
 //}
@@ -258,4 +263,8 @@ void Field::printField() {
         fieldState[i].printQueue();
         if((i+1)%3 == 0) cout << endl;
     }
+}
+
+int Field::scoreDifference() {
+    return fieldScore.difference();
 }

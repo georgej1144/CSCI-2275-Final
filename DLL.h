@@ -24,12 +24,14 @@ struct LLNode {
 template <typename T>
 class DLL {
 private:
-    LLNode<T> *head;
-    LLNode<T> *tail;
+    LLNode<T>* head;
+    LLNode<T>* tail;
 public:
     DLL();
+    int length = 0;
 //    ~DLL();
     T dataAtIndex(int index);
+    T* pdataAtIndex(int index);
     LLNode<T>* getHead();
     //void prepend(T val);
     void append(T val);

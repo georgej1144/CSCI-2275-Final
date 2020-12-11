@@ -9,7 +9,6 @@ using namespace std;
 struct Score {
     int Home = 0;
     int Away = 0;
-    string move;
 
     void printScore() const;
     void printScoreDifference() const;
